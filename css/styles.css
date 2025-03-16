@@ -1,0 +1,227 @@
+/* Place your CSS styles in this file */
+
+ /* Theme Colors */
+ :root {
+    --primary-color: #0D3B66;
+    --secondary-color: #F4D35E;
+    --accent-color: #FAF0CA;
+    --highlight-color: #F95738;
+    --background-color: #EEF2F5;
+}
+
+body {
+    background-color: var(--background-color);
+    color: #000;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: var(--primary-color);
+}
+
+.navbar-brand, .nav-link {
+    color: var(--accent-color) !important;
+}
+
+.navbar-brand img {
+    height: 30px;
+}
+
+.active {
+    color: var(--secondary-color);
+}
+
+.dropdown-item:hover {
+    border-radius: 5px;
+    color: white;
+    background-color: var(--highlight-color) !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    padding: 60px 0;
+}
+
+/* Adjust the height of the product image */
+.product-image {
+    width: auto;
+    height: 275px;
+    object-fit: cover;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .product-image {
+        width: auto;
+        height: 275px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-image {
+        width: auto;
+        height: 200px;
+        object-fit: cover;
+    }
+}
+
+/* Product Card Styling */
+.product-card {
+    border: 1px solid var(--secondary-color);
+}
+
+.product-card .card-title {
+    color: var(--primary-color);
+}
+
+.product-card .card-text {
+    color: var(--highlight-color);
+}
+
+/* Footer Styling */
+footer a:hover {
+    color: var(--highlight-color);
+    text-decoration: underline;
+}
+
+.social-icons a {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+    color: var(--highlight-color);
+}
+
+/* Responsive Navbar Adjustments */
+.nav-icon {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-icon {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    .nav-text {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 769px) {
+    .nav-text {
+        display: inline-block;
+    }
+}
+
+.best-seller-heading {
+    font-size: 2.5rem; /* Adjust font size as needed */
+    font-weight: 700; /* Makes the text bold */
+    color: #0D3B66; /* Primary color or any color of your choice */
+    position: relative;
+    padding-left: 20px; /* Adds padding to align the text better */
+    border-left: 5px solid #F95738; /* Accent color or any color of your choice */
+    display: inline-block;
+}
+
+.best-seller-heading::before {
+    content: ''; /* Adds a decorative element before the heading */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px; /* Width of the decorative line */
+    height: 100%; /* Height of the line */
+    background-color: #F95738; /* Accent color or any color of your choice */
+}
+
+.feature-section {
+    padding: 100px 0;
+    background-color: var(--background-color);
+    position: relative;
+}
+
+.feature-heading {
+    color: var(--primary-color);
+    margin-bottom: 60px;
+}
+
+.feature-heading h2 {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.feature-heading p {
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+}
+
+.feature-card {
+    border: none;
+    text-align: center;
+    padding: 40px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: white;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    transform: translateY(-20px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card img {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.feature-card h5 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
+    color: white;
+    font-size: 1.2rem;
+    padding: 6px 20px;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .feature-card {
+        margin-bottom: 30px;
+    }
+
+    .feature-heading h2 {
+        font-size: 2.8rem;
+    }
+}
