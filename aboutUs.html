@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us  - Beat Zone</title>
+    <link rel="icon" href="image/logo3.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color: #0D3B66;
+            --secondary-color: #F4D35E;
+            --accent-color: #FAF0CA;
+            --highlight-color: #F95738;
+            --background-color: #EEF2F5;
+        }
+
+        body {
+            background-color: var(--background-color);
+        }
+
+        .about-us-section {
+            background-color: var(--background-color);
+            padding: 5rem 0;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .about-heading {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .about-heading span {
+            color: var(--highlight-color);
+        }
+
+        .about-img {
+            border-radius: 15px;
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .about-img:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background-color: var(--highlight-color);
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+        }
+
+        .core-values-section {
+            background-color: var(--background-color);
+            padding:0 0 6rem 0;
+            border-radius: 15px;
+        }
+
+        .values-heading {
+            color: #0D3B66;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+
+        .value-card {
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+            color: #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            overflow: hidden;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+            background-color: #F4F4F4;
+        }
+
+        .value-icon {
+            background: #F95738;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            color: #FFF;
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .value-icon:hover {
+            background-color: #F4D35E;
+        }
+
+        .value-card h5 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .footer-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+        }
+
+        .footer-section p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand flex items-center" href="#">
+      <img src="image/logo3.png" alt="" class="mt-1 me-3 h-8 w-8"> Beat Zone
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto me-3">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">
+            <i class="fas fa-home nav-icon"></i>
+            <span class="nav-text">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="shop.html">
+            <i class="fas fa-shopping-bag nav-icon"></i>
+            <span class="nav-text">Shop</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="aboutUs.html">
+            <i class="fas fa-info-circle nav-icon"></i>
+            <span class="nav-text active">About Us</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cart.html">
+            <i class="fas fa-shopping-cart nav-icon"></i>
+            <span class="nav-text">Cart</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">
+            <i class="fas fa-envelope nav-icon"></i>
+            <span class="nav-text">Contact Us</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link btn btn-primary text-white" href="login.html">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- About Us Section -->
+<section class="about-us-section" data-aos="fade-up">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Left Column (Text) -->
+            <div class="col-md-6" data-aos="fade-right" data-aos-delay="200">
+                <div class="best-seller-heading mb-4">
+                    <h2 class="about-heading" style="color: var(--primary-color); font-weight: 700; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);" data-aos="flip-left" data-aos-delay="300">About <span style="text-transform: none;">Earbuds Store</span></h2>
+                </div>
+                <p class="lead text-justify" data-aos="fade-right" data-aos-delay="400">
+                    At Earbuds Store, we are dedicated to bringing you the highest-quality wireless audio experience 
+                    with cutting-edge technology and superior design. Our products are designed to provide unbeatable 
+                    sound, comfort, and style, ensuring you enjoy your favorite music anytime, anywhere.
+                </p>
+                <p class="text-justify" data-aos="fade-right" data-aos-delay="600">
+                    Founded in 2023, we have been at the forefront of the audio revolution, offering a range of products 
+                    that cater to every lifestyle. Whether you are a fitness enthusiast, a traveler, or simply an audiophile, 
+                    our earbuds are tailored to meet your needs.
+                </p>
+                <a href="shop.html" class="btn btn-primary mt-3" data-aos="zoom-in" data-aos-delay="800">Shop Now</a>
+            </div>
+            
+            <!-- Right Column (Image) -->
+            <div class="col-md-6 text-center" data-aos="fade-left" data-aos-delay="400">
+                <div class="about-img-wrapper" data-aos="flip-right" data-aos-delay="500">
+                    <img src="image/shop.webp" alt="Earbuds Image" class="img-fluid about-img">
+                <div class="about-img-overlay" data-aos="fade-in" data-aos-delay="600"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Values Section -->
+<section class="core-values-section" data-aos="fade-up">
+    <div class="container">
+        <div class="best-seller-heading mb-5">
+            <h2 style="color: var(--primary-color); font-weight: 700; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);">Our <span style="text-transform: none;">Core Values</span></h2>
+        </div>
+        <div class="row text-center">
+            <!-- Innovation Card -->
+            <div class="col-md-4" data-aos="fade-right" data-aos-delay="300">
+                <div class="value-card p-4">
+                    <div class="value-icon mb-3">
+                        <i class="fas fa-headphones-alt fa-3x"></i>
+                    </div>
+                    <h5 class="mb-3">Innovation</h5>
+                    <p>We constantly innovate to bring you the best in wireless audio technology.</p>
+                </div>
+            </div>
+            <!-- Quality Card -->
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="500">
+                <div class="value-card p-4">
+                    <div class="value-icon mb-3">
+                        <i class="fas fa-star fa-3x"></i>
+                    </div>
+                    <h5 class="mb-3">Quality</h5>
+                    <p>Our earbuds are built with premium materials for durability and high performance.</p>
+                </div>
+            </div>
+            <!-- Customer Satisfaction Card -->
+            <div class="col-md-4" data-aos="fade-left" data-aos-delay="700">
+                <div class="value-card p-4">
+                    <div class="value-icon mb-3">
+                        <i class="fas fa-heart fa-3x"></i>
+                    </div>
+                    <h5 class="mb-3">Customer Satisfaction</h5>
+                    <p>Your happiness is our priority. We offer personalized customer support for all your needs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer-section text-center">
+    <div class="container">
+        <p>&copy; 2024 Earbuds Store. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+</script>
+</body>
+</html>

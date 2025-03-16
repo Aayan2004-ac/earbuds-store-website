@@ -1,0 +1,2584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop  - Beat Zone</title>
+    <link rel="icon" href="image/logo3.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        :root {
+            --primary-color: #0D3B66;
+            --secondary-color: #F4D35E;
+            --accent-color: #FAF0CA;
+            --highlight-color: #F95738;
+            --background-color: #EEF2F5;
+        }
+
+        body {
+            background-color: var(--background-color);
+        }
+        
+        .active {
+            color: var(--secondary-color);
+        }
+
+        #priceValue {
+            color: var(--highlight-color);
+            font-weight: bold;
+        }
+
+        .product-card {
+            border: none;
+            margin-bottom: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--secondary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        .card-body h6 {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .card-body p {
+            color: var(--highlight-color);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .productDetail {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-success {
+            width: 100%;
+        }
+
+        .brand-checkbox {
+            cursor: pointer;
+        }
+
+        .modal-content {
+        background-color: var(--background-color);
+    }
+
+    strong {
+    font-weight: bold !important;
+}
+
+    .modal-footer button {
+        transition: background-color 0.3s ease;
+    }
+
+    .modal-footer button:hover {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* Image Hover Effect */
+    #modalProductImage:hover {
+        transform: scale(1.05);
+        transition: transform 0.5s ease-in-out;
+    }
+
+    /* Text hover effect */
+    h5#modalProductName:hover {
+        color: var(--highlight-color);
+        transition: color 0.3s ease-in-out;
+    }
+
+    /* Animation for buttons */
+    .modal-footer .btn-dark {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    .footer-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+        }
+
+        .footer-section p {
+            margin: 0;
+        }
+
+        .margin {
+            margin-top: 60px;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .zoom-image {
+        transition: transform 0.3s ease-in-out; /* Smooth zoom effect */
+    }
+    .zoom-image:hover {
+        transform: scale(1.1); /* Scale up the image */
+    }
+    .no-product-found {
+        font-size: 2rem; 
+        text-align: center;
+        width: 100%; 
+        color: #0D3B66;
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        height: 300px; 
+    }
+
+    .webp-image {
+    background-color: #f4f4f4; 
+    display: block; 
+    padding: 20px; 
+    margin: 10px; 
+    border-radius: 10px; 
+}
+
+    /* Scroll-to-Top Button Styling */
+#topBtn {
+    display: none; 
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    bottom: 40px;
+    right: 30px;
+    z-index: 1000; 
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#topBtn:hover {
+    background-color: #555; /* Slight hover effect */
+}
+
+#sidebarFilters .offcanvas-body {
+    overflow-y: none; 
+    scrollbar-width: none; 
+}
+
+/* Cart Sidebar Styling */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -350px; /* Initially hidden */
+    width: 350px;
+    height: 100%;
+    background-color: #ffffff;
+    transition: right 0.4s ease-in-out;
+    z-index: 1050;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    border-left: 1px solid #dee2e6;
+}
+
+/* Sidebar Header */
+.cart-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 1.2rem;
+}
+
+/* Close Button Styling */
+.close-cart {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Cart Body Styling */
+.cart-body {
+    padding: 0;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+}
+
+/* Cart Summary */
+.cart-summary {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 1rem;
+}
+
+/* Ensure the offcanvas body takes full height */
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Full height of the sidebar */
+}
+
+/* Cart items list scrollable only vertically, prevent horizontal scroll */
+#cart-items {
+    overflow-y: auto;  /* Vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    flex-grow: 1;  /* Let the list grow and take available space */
+}
+
+/* Optional: Set a max height for smoother scroll if needed */
+#cart-items {
+    max-height: calc(100vh - 150px); /* Adjust this value as per your design */
+}
+
+/* Cart summary */
+.cart-summary {
+    background-color: #f8f9fa; /* Optional background color */
+    position: sticky; /* Make the summary stick to the bottom */
+    bottom: 0; /* Always stay at the bottom */
+}
+
+/* Cart Footer */
+.cart-footer {
+    padding-top: 10px;
+}
+
+/* Cart Items */
+#cart-items li {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#cart-items img {
+    max-width: 50px;
+    border-radius: 4px;
+}
+
+/* Transition Effect */
+.cart-sidebar.open {
+    right: 0;
+}
+
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand flex items-center" href="#">
+      <img src="image/logo3.png" alt="" class="mt-1 me-3 h-8 w-8"> Beat Zone
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto me-3">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">
+            <i class="fas fa-home nav-icon"></i>
+            <span class="nav-text">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="shop.html">
+            <i class="fas fa-shopping-bag nav-icon"></i>
+            <span class="nav-text active">Shop</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="aboutUs.html">
+            <i class="fas fa-info-circle nav-icon"></i>
+            <span class="nav-text">About Us</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cart.html">
+            <i class="fas fa-shopping-cart nav-icon"></i>
+            <span class="nav-text">Cart</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">
+            <i class="fas fa-envelope nav-icon"></i>
+            <span class="nav-text">Contact Us</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link btn btn-primary text-white" href="login.html">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<button onclick="scrollToTop()" id="topBtn" class="btn scroll-to-top-btn shadow-lg">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- Shop Section -->
+<section id="shop" class="py-3">
+    <div class="container-fluid margin">
+        <div class="row">
+            <!-- Top Controls: Filter, Search, Sort -->
+            <div class="mb-4">
+                <div class="row align-items-center">
+                    <!-- Filter Button for large screens -->
+                    <div class="col-md-3 d-none d-md-flex">
+                        <button id="filterBtnLarge" class="btn btn-dark w-auto">
+                            <i class="bi bi-filter"></i> Filter By
+                        </button>
+                    </div>
+
+                    <!-- Search Bar for large screens -->
+                    <div class="col-md-6 d-none d-md-flex justify-content-center">
+                        <input type="text" id="search" class="form-control search-bar w-100" placeholder="Search products...">
+                    </div>
+
+                    <!-- Sort Select for large screens -->
+                    <div class="col-md-3 d-none d-md-flex justify-content-end">
+                        <select class="form-select w-auto" id="sortOptionsLarge">
+                            <option value="popular">Sort by Popularity</option>
+                            <option value="lowToHigh">Price: Low to High</option>
+                            <option value="highToLow">Price: High to Low</option>
+                        </select>
+                    </div>
+
+                    <!-- Stacked layout for smaller screens -->
+                    <div class="col-12 d-md-none">
+                        <!-- Search Bar -->
+                        <div class="mb-2">
+                            <input type="text" id="search-mobile" class="form-control search-bar" placeholder="Search products...">
+                        </div>
+                        <div class="row">
+                            <!-- Filter Button -->
+                            <div class="col-6">
+                                <button id="filterBtn" class="btn btn-dark w-100">
+                                    <i class="bi bi-filter"></i> Filter By
+                                </button>
+                            </div>
+                            <!-- Sort Select -->
+                            <div class="col-6">
+                                <select class="form-select" id="sortOptionsSmall">
+                                    <option value="popular">Sort by Popularity</option>
+                                    <option value="lowToHigh">Price: Low to High</option>
+                                    <option value="highToLow">Price: High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Listing -->
+            <div class="col-md-12">
+                <div class="row" id="bestseller-list">
+                    <!-- Product Cards will be generated here -->
+                </div>
+                <div id="no-product-found" style="display:none;">No product found</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sidebar Filters (Hidden by default) -->
+<div id="sidebarFilters" class="offcanvas offcanvas-start" tabindex="-1">
+    <div class="offcanvas-header text-white" style="background-color: var(--primary-color)">
+        <h5 class="offcanvas-title"><i class="bi bi-filter"></i> Filter By</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        
+        <!-- Price Range -->
+        <h6 class="fw-bold"><i class="bi bi-currency-rupee"></i> Price Range</h6>
+        <input type="range" class="form-range mb-3" min="1000" max="10000" step="100" id="priceRange" value="10000">
+        <p>Price: <span id="priceValue">₹10000</span> - ₹10000</p>
+
+        <!-- Brands Section -->
+        <h6 class="fw-bold d-flex align-items-center mt-2" id="brandToggle" style="cursor: pointer;">
+            <i class="fa-solid fa-list me-2"></i>
+            <span>Brands</span>
+            <i class="bi bi-chevron-down ms-auto" id="arrow"></i>
+        </h6>
+
+        <ul class="list-group" id="brandFilters" style="display: none;">
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="Boat">Boat</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="Boult">Boult</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="Realme">Realme</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="Noice">Noice</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="Sony">Sony</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="Bose">Bose</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="Samsung">Samsung</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="Jabra">Jabra</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="Huawei">Huawei</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 brand-checkbox" value="JBL">JBL</li>
+        </ul>
+
+        <!-- Product Type -->
+        <h6 class="fw-bold d-flex align-items-center mt-2" id="productTypeToggle" style="cursor: pointer;">
+            <i class="bi bi-list me-2"></i> Product Type <i class="bi bi-chevron-down ms-auto" id="productTypeArrow"></i>
+        </h6>
+        <ul class="list-group mb-3" id="productTypeFilters" style="display: none;">
+            <li class="list-group-item"><input type="checkbox" class="me-2 product-type-checkbox" value="wireless-earbuds"> Wireless Earbuds</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 product-type-checkbox" value="bluetooth-earbuds"> Bluetooth Earbuds</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 product-type-checkbox" value="in-ear-headphones"> In-Ear Headphones</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 product-type-checkbox" value="sports-earbuds"> Sports Earbuds</li>
+        </ul>
+
+        <!-- Popular Collections -->
+        <h6 class="fw-bold d-flex align-items-center mt-2" id="popularCollectionsToggle" style="cursor: pointer;">
+            <i class="bi bi-stars me-2"></i> Popular Collections <i class="bi bi-chevron-down ms-auto" id="popularCollectionsArrow"></i>
+        </h6>
+        <ul class="list-group mb-3" id="popularCollectionsFilters" style="display: none;">
+            <li class="list-group-item"><input type="checkbox" class="me-2 popular-collection-checkbox" value="best-sellers"> Best Sellers</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 popular-collection-checkbox" value="top-rated"> Top Rated</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 popular-collection-checkbox" value="new-arrivals"> New Arrivals</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 popular-collection-checkbox" value="limited-edition"> Limited Edition</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 popular-collection-checkbox" value="popular-picks"> Popular Picks</li>
+        </ul>
+
+        <!-- Features -->
+        <h6 class="fw-bold d-flex align-items-center mt-2" id="featuresToggle" style="cursor: pointer;">
+            <i class="bi bi-gear me-2"></i> Features <i class="bi bi-chevron-down ms-auto" id="featuresArrow"></i>
+        </h6>
+        <ul class="list-group mb-3" id="featuresFilters" style="display: none;">
+            <li class="list-group-item"><input type="checkbox" value="noise-cancellation" class="me-2 feature-checkbox"> Active Noise Cancellation</li>
+            <li class="list-group-item"><input type="checkbox" value="touch-controls" class="me-2 feature-checkbox"> Touch Controls</li>
+            <li class="list-group-item"><input type="checkbox" value="voice-assistant-compatible" class="me-2 feature-checkbox"> Voice Assistant Compatible</li>
+            <li class="list-group-item"><input type="checkbox" value="sweatproof-waterproof" class="me-2 feature-checkbox"> Sweatproof & Waterproof</li>
+            <li class="list-group-item"><input type="checkbox" value="quick-charging" class="me-2 feature-checkbox"> Quick Charging</li>
+            <li class="list-group-item"><input type="checkbox" value="dual-device-pairing" class="me-2 feature-checkbox"> Dual-Device Pairing</li>
+            <li class="list-group-item"><input type="checkbox" value="auto-pairing" class="me-2 feature-checkbox"> Auto Pairing</li>
+            <li class="list-group-item"><input type="checkbox" value="wireless-charging" class="me-2 feature-checkbox"> Wireless Charging</li>
+        </ul>
+
+        <!-- Sound Quality -->
+        <h6 class="fw-bold d-flex align-items-center mt-2" id="soundQualityToggle" style="cursor: pointer;">
+            <i class="bi bi-volume-up me-2"></i> Sound Quality <i class="bi bi-chevron-down ms-auto" id="soundQualityArrow"></i>
+        </h6>
+        <ul class="list-group mb-3" id="soundQualityFilters" style="display: none;">
+            <li class="list-group-item"><input type="checkbox" class="me-2 sound-quality-checkbox" value="premium-sound"> Premium Sound</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 sound-quality-checkbox" value="surround-sound"> Surround Sound</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 sound-quality-checkbox" value="bass-boost"> Bass Boost</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 sound-quality-checkbox" value="hi-res-audio"> Hi-Res Audio</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 sound-quality-checkbox" value="low-latency"> Low Latency</li>
+        </ul>
+
+        <!-- Battery Life -->
+        <h6 class="fw-bold d-flex align-items-center mt-2" id="batteryLifeToggle" style="cursor: pointer;">
+            <i class="bi bi-battery-charging me-2"></i> Battery Life <i class="bi bi-chevron-down ms-auto" id="batteryLifeArrow"></i>
+        </h6>
+        <ul class="list-group mb-3" id="batteryLifeFilters" style="display: none;">
+            <li class="list-group-item"><input type="checkbox" class="me-2 battery-life-checkbox" value="up-to-20-hours"> Up to 20 Hours</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 battery-life-checkbox" value="long-battery-life"> Long Battery Life</li>
+        </ul>
+
+        <!-- Usage & Lifestyle -->
+        <h6 class="fw-bold d-flex align-items-center mt-2" id="usageLifestyleToggle" style="cursor: pointer;">
+            <i class="bi bi-activity me-2"></i> Usage & Lifestyle <i class="bi bi-chevron-down ms-auto" id="usageLifestyleArrow"></i>
+        </h6>
+        <ul class="list-group mb-3" id="usageLifestyleFilters" style="display: none;">
+            <li class="list-group-item"><input type="checkbox" class="me-2 usage-lifestyle-checkbox" value="gym-workout"> Gym & Workout</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 usage-lifestyle-checkbox" value="travel-friendly"> Travel-Friendly</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 usage-lifestyle-checkbox" value="office-use"> Office Use</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 usage-lifestyle-checkbox" value="gaming-earbuds"> Gaming Earbuds</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 usage-lifestyle-checkbox" value="home-audio"> Home Audio</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 usage-lifestyle-checkbox" value="commuter-friendly"> Commuter Friendly</li>
+        </ul>
+
+        <!-- Budget -->
+        <h6 class="fw-bold d-flex align-items-center mt-2" id="budgetToggle" style="cursor: pointer;">
+            <i class="bi bi-wallet2 me-2"></i> Budget <i class="bi bi-chevron-down ms-auto" id="budgetArrow"></i>
+        </h6>
+        <ul class="list-group mb-3" id="budgetFilters" style="display: none;">
+            <li class="list-group-item"><input type="checkbox" class="me-2 budget-checkbox" value="affordable-earbuds"> Affordable Earbuds</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 budget-checkbox" value="budget-friendly"> Budget-Friendly</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 budget-checkbox" value="high-end-audio"> High-End Audio</li>
+        </ul>
+
+        <!-- Technical Specifications -->
+        <h6 class="fw-bold d-flex align-items-center mt-2" id="technicalSpecsToggle" style="cursor: pointer;">
+            <i class="bi bi-hdd me-2"></i> Technical Specifications <i class="bi bi-chevron-down ms-auto" id="technicalSpecsArrow"></i>
+        </h6>
+        <ul class="list-group mb-3" id="technicalSpecsFilters" style="display: none;">
+            <li class="list-group-item"><input type="checkbox" class="me-2 technical-spec-checkbox" value="bluetooth-5.0"> Bluetooth 5.0</li>
+            <li class="list-group-item"><input type="checkbox" class="me-2 technical-spec-checkbox" value="usb-c-charging"> USB-C Charging</li>
+        </ul>
+
+    </div>
+</div>
+
+<!-- Product Detail Modal -->
+<div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg" style="border: 2px solid var(--primary-color); border-radius: 10px;">
+            <div class="modal-header productDetail" style="background-color: var(--primary-color);">
+                <h5 class="modal-title text-white" id="productDetailModalLabel">Product Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="height: 50vh; overflow-y: auto;">
+                <div class="row">
+                     <!-- Left Side: Product Image Slider -->
+                     <div class="col-md-5" data-aos="zoom-in">
+                        <div id="productImageCarousel" class="carousel slide product-card shadow-sm rounded" data-bs-ride="carousel" data-bs-interval="3000">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#productImageCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#productImageCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#productImageCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner rounded">
+                                <div class="carousel-item active">
+                                    <img id="modalProductImage1" src="" class="img-fluid rounded shadow-sm border zoom-image" alt="Product Image 1" style="border-color: var(--highlight-color);">
+                                </div>
+                                <div class="carousel-item">
+                                    <img id="modalProductImage2" src="" class="img-fluid rounded shadow-sm border zoom-image" alt="Product Image 2" style="border-color: var(--highlight-color);">
+                                </div>
+                                <div class="carousel-item">
+                                    <img id="modalProductImage3" src="" class="img-fluid rounded shadow-sm border zoom-image" alt="Product Image 3" style="border-color: var(--highlight-color);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Product details -->
+                    <div class="col-md-7 p-3" data-aos="zoom-in">
+                        <h5 id="modalProductName" class="fw-bold mb-3" style="color: var(--primary-color);"></h5>
+                        <p id="modalProductPrice" class="h5 mb-3" style="color: var(--highlight-color);"></p>
+                        <div class="col-md-12">
+                            <p>
+                                <strong class="text-muted fs-5">Description: </strong>
+                            </p>
+                            <p id="modalProductDescription" class="text-dark text-justify"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>
+                        <strong class="text-muted fs-5">Specifications: </strong>
+                    </p>
+                    <div class="col-md-12 col-sm-12 col-12">
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong class="text-muted">Color: </strong>
+                            <span id="modalProductColor" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Brand: </strong>
+                            <span id="modalProductBrand" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted"style="text-align: justify;">
+                            <strong>Noise Cancellation: </strong>
+                            <span id="modalProductNC" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Battery Life: </strong>
+                            <span id="modalProductBL" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Water Resistance: </strong>
+                            <span id="modalProductWR" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Touch Controls: </strong>
+                            <span id="modalProductTC" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Voice Assistant: </strong>
+                            <span id="modalProductVA" class="text-muted"></span>
+                        </p>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-12">
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Connectivity: </strong>
+                            <span id="modalProductCon" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Sound Quality: </strong>
+                            <span id="modalProductSQ" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Battery & Charging: </strong>
+                            <span id="modalProductBC" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Fit & Comfort: </strong>
+                            <span id="modalProductFC" class="text-muted"></span>
+                        </p>
+                        <p class="text-muted" style="text-align: justify;">
+                            <strong>Additional Specifications: </strong>
+                            <span id="modalProductAS" class="text-muted"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between" style="background-color: var(--secondary-color);">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                <a href="#" class="btn btn-dark add-to-cart d-flex align-items-center justify-content-center" id="addToCart">
+                    <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Offcanvas Cart Sidebar -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cart-sidebar" aria-labelledby="cartLabel">
+    <div class="offcanvas-header d-flex justify-content-between align-items-center text-white" style="background-color: var(--primary-color)">
+        <h5 class="mb-0 offcanvas-title" id="cartLabel"><i class="bi bi-cart-fill me-2"></i>Your Cart</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <!-- Full offcanvas body container -->
+    <div class="offcanvas-body d-flex flex-column">
+        <ul id="cart-items" class="list-group list-group-flush mb-3 flex-grow-1" style="overflow-y: auto; overflow-x: hidden;">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+        
+        <!-- Cart summary fixed at the bottom -->
+        <div class="cart-summary p-3 border-top" style="position: sticky; bottom: 0; background-color: white;">
+            <div class="d-flex justify-content-between">
+                <span>Total Items:</span>
+                <span id="total-items" class="fw-bold">0</span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span>Total Price:</span>
+                <span id="total-price" class="fw-bold">₹0.00</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="footer-section text-center">
+    <div class="container">
+        <p>&copy; 2024 Earbuds Store. All rights reserved.</p>
+    </div>
+</footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        const topBtn = document.getElementById("topBtn");
+        window.onscroll = function() { scrollFunction(); };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                topBtn.style.display = "block"; 
+            } else {
+                topBtn.style.display = "none";  
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth" 
+            });
+        }
+    </script>
+
+    <script>
+        function setupToggle(toggleId, filterId, arrowId) {
+            const toggleElement = document.getElementById(toggleId);
+            const filterElement = document.getElementById(filterId);
+            const arrowElement = document.getElementById(arrowId);
+
+            // Debugging logs to verify elements and events
+            console.log("Setting up toggle for:", toggleId, filterId, arrowId);
+            console.log("Toggle Element:", toggleElement);
+            console.log("Filter Element:", filterElement);
+            console.log("Arrow Element:", arrowElement);
+
+            toggleElement.addEventListener('click', function() {
+                console.log("Toggle clicked");
+                if (filterElement.style.display === 'none' || filterElement.style.display === '') {
+                    filterElement.style.display = 'block';
+                    arrowElement.classList.remove('bi-chevron-down');
+                    arrowElement.classList.add('bi-chevron-up');
+                } else {
+                    filterElement.style.display = 'none';
+                    arrowElement.classList.remove('bi-chevron-up');
+                    arrowElement.classList.add('bi-chevron-down');
+                }
+            });
+        }
+
+        // Set up toggle functionality for each filter category
+        setupToggle('brandToggle', 'brandFilters', 'arrow');
+        setupToggle('productTypeToggle', 'productTypeFilters', 'productTypeArrow');
+        setupToggle('popularCollectionsToggle', 'popularCollectionsFilters', 'popularCollectionsArrow');
+        setupToggle('featuresToggle', 'featuresFilters', 'featuresArrow');
+        setupToggle('soundQualityToggle', 'soundQualityFilters', 'soundQualityArrow');
+        setupToggle('batteryLifeToggle', 'batteryLifeFilters', 'batteryLifeArrow');
+        setupToggle('usageLifestyleToggle', 'usageLifestyleFilters', 'usageLifestyleArrow');
+        setupToggle('budgetToggle', 'budgetFilters', 'budgetArrow');
+        setupToggle('technicalSpecsToggle', 'technicalSpecsFilters', 'technicalSpecsArrow');
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get both filter buttons (large screen and small screen)
+            const filterButtons = document.querySelectorAll('#filterBtn, #filterBtnLarge');
+            
+            // Add event listener to each filter button
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Trigger the offcanvas when either button is clicked
+                    var offcanvasElement = new bootstrap.Offcanvas(document.getElementById('sidebarFilters'));
+                    offcanvasElement.show();
+                });
+            });
+        });
+    </script>
+
+    <script>
+        AOS.init({
+            duration: 1000, 
+            easing: 'ease-in-out', 
+            once: true 
+        });
+    </script>
+    
+    <script>
+$(document).ready(function () {
+    var products = [
+        // Boat
+        {
+            id: 6,
+            name: "Nirvana Ion ANC Limited",
+            image: "image/boat1/img2.webp",
+            image1: "image/boat1/img2(1).webp",
+            image2: "image/boat1/img2(2).webp",
+            color: "red and black touch of white",
+            type: "Noise Cancellation",
+            ptype: ["wireless-earbuds","bluetooth-earbuds", "in-ear-headphones", "sports-earbuds"],
+            collection: ["best-sellers","limited-edition", "popular-picks"],
+            features: ["noise-cancellation", "touch-controls", "voice-assistant-compatible", "sweatproof-waterproof","quick-charging", "dual-device-pairing", "auto-pairing", "wireless-charging"],
+            soundQuality: ["premium-sound","surround-sound", "bass-boost", "hi-res-audio", "low-latency"],
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: ["gym-workout", "travel-friendly", "office-use", "gaming-earbuds", "home-audio"],
+            budget: ["high-end-audio"],
+            technicalSpecs: ["bluetooth-5.0"],
+            price: 3499,
+            nc: "Yes, Active Noise Cancellation (ANC)",
+            bl: "Up to 24 hours",
+            wr: "IPX7",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "Fast charging, USB-C",
+            fc: "Ergonomic design with customizable ear tips",
+            as: "Compact case, quick pairing",
+            brand: "Boat",
+            description: "The Nirvana Ion ANC Limited earbuds offer immersive sound quality with advanced noise-cancellation technology. Designed to provide a comfortable fit with long-lasting battery life, they are perfect for active and everyday use, with touch controls and IPX7 water resistance making them ideal for all environments."
+        },
+        {
+            id: 7,
+            name: "boAt Nirvana Ivy",
+            image: "image/boat1/img3.webp",
+            image1: "image/boat1/img3(1).webp",
+            image2: "image/boat1/img3(2).webp",
+            color: "Gunmetal Black",
+            type: "Noise Cancellation",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones"],
+            collection: ["best-sellers", "new-arrivals"],
+            features: ["noise-cancellation","touch-controls","voice-assistant-compatible", "sweatproof-waterproof", "quick-charging", "auto-pairing"],
+            soundQuality: ["bass-boost"],
+            batteryLife: ["up-to-20-hours"],
+            usageLifestyle: ["gym-workout", "travel-friendly", "office-use", "commuter-friendly"],
+            budget: ["affordable-earbuds", "budget-friendly"],
+            technicalSpecs: ["bluetooth-5.0"],
+            price: 3299,
+            nc: "Passive Noise Isolation",
+            bl: "Up to 15 hours (with case)",
+            wr: "IPX4 (splash resistant)",
+            tc: "Yes, touch-sensitive controls for music and calls",
+            va: "Compatible with voice assistants (Siri, Google Assistant)",
+            con: "Bluetooth 5.0 for a stable and fast connection",
+            sq: "High-definition audio with a balanced sound profile and deep bass",
+            bc: "Fast charging capability with USB Type-C; quick charge feature",
+            fc: "Ergonomically designed for a snug fit, lightweight for all-day comfort",
+            as: "Dual microphone for enhanced call quality, custom EQ settings via the boAt app",
+            brand: "Boat",
+            description: "The boAt Nirvana Ivy earbuds combine advanced technology with sleek design, providing a comfortable and immersive listening experience. They are perfect for music lovers and professionals alike, with features that enhance usability and sound quality."
+        },
+        {
+            id: 8,
+            name: "boAt Nirvana Space",
+            image: "image/boat1/img4.webp",
+            image1: "image/boat1/img4(1).webp",
+            image2: "image/boat1/img4(2).webp",
+            color: "Cosmic Black",
+            type: "Noise Cancellation",
+            ptype: ["wireless-earbuds","bluetooth-earbuds","in-ear-headphones"],
+            collection: ["best-sellers", "top-rated", "new-arrivals"],
+            features: ["noise-cancellation", "touch-controls", "voice-assistant-compatible", "sweatproof-waterproof", "quick-charging", "dual-device-pairing", "auto-pairing"],
+            soundQuality: ["premium-sound", "bass-boost", "hi-res-audio", "low-latency"],
+            batteryLife: ["long-battery-life", "up-to-20-hours"],
+            usageLifestyle: ["gym-workout", "travel-friendly", "office-use", "gaming-earbuds", "commuter-friendly"],
+            budget: ["high-end-audio"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 2299,
+            nc: "Yes, Active Noise Cancellation (ANC)",
+            bl: "Up to 30 hours with the charging case",
+            wr: "IPX5 rated",
+            tc: "Yes, customizable touch controls for music and calls",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.0 for a stable connection",
+            sq: "High-fidelity sound with deep bass and clear treble",
+            bc: "Fast charging capability; USB-C charging",
+            fc: "Ergonomic design with multiple ear tip sizes for a snug fit",
+            as: "Compact charging case with LED battery indicators. Quick pairing feature with compatible devices",
+            brand: "Boat",
+            description: "The boAt Nirvana Space earbuds deliver an unparalleled audio experience with their advanced Active Noise Cancellation technology, ensuring immersive sound quality without distractions. Designed for comfort, they come with an ergonomic shape and multiple ear tip options to fit securely in your ears."
+        },
+        {
+            id: 9,
+            name: "boAt Airdopes 141",
+            image: "image/boat1/img5.webp",
+            image1: "image/boat1/img5(1).webp",
+            image2: "image/boat1/img5(2).webp",
+            color: "Cyan Cider",
+            type: "42 Hours Playback",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones"],
+            collection: ["best-sellers", "budget-picks"],
+            features: ["noise-cancellation", "touch-controls", "voice-assistant-compatible", "sweatproof-waterproof", "quick-charging", "auto-pairing"],
+            soundQuality: ["bass-boost"],
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: ["gym-workout", "home-audio", "commuter-friendly"],
+            budget: ["affordable-earbuds", "budget-friendly"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 1299,
+            nc: "No active noise cancellation, but features passive noise isolation",
+            bl: "Up to 25 hours with the charging case",
+            wr: "IPX4 rated",
+            tc: "Yes, touch controls for music playback and calls",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.0 for stable and quick connectivity",
+            sq: "Balanced sound with deep bass and clear vocals",
+            bc: "Fast charging capability; USB-C charging",
+            fc: "Lightweight design with ergonomic fit for all-day comfort",
+            as: "Compact charging case with LED battery indicators. Quick pairing feature with compatible devices.",
+            brand: "Boat",
+            description: "The boAt Airdopes 141 earbuds offer an exceptional audio experience with a lightweight design and ergonomic fit, ensuring comfort during extended wear. With a battery life of up to 25 hours, including the charging case, these earbuds are perfect for everyday use, whether you are commuting, working out, or just relaxing at home."
+        },
+        {
+            id: 10,
+            name: "boAt Nirvana Ion ANC",
+            image: "image/boat1/img7.webp",
+            image1: "image/boat1/img7(1).webp",
+            image2: "image/boat1/img7(2).webp",
+            color: "Quartz White",
+            type: "Noise Cancellation",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones"],
+            collection: ["best-sellers", "limited-edition"],
+            features: ["noise-cancellation", "touch-controls", "voice-assistant-compatible", "sweatproof-waterproof", "quick-charging", "dual-device-pairing", "auto-pairing"],
+            soundQuality: ["premium-sound", "hi-res-audio", "bass-boost", "low-latency"],
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: ["gym-workout", "travel-friendly", "office-use", "commuter-friendly"],
+            budget: ["high-end-audio"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 2499,
+            nc: "Yes, Active Noise Cancellation (ANC)",
+            bl: "Up to 24 hours with the charging case",
+            wr: "IPX7 rated",
+            tc: "Yes, touch controls for playback and calls",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2 for reliable and quick connectivity",
+            sq: "High Fidelity audio with deep bass and clear sound",
+            bc: "Fast charging capability; USB-C charging",
+            fc: "Ergonomic design with customizable ear tips for a comfortable fit",
+            as: "Compact charging case with quick pairing features. Supports dual pairing for seamless connectivity with multiple devices.",
+            brand: "Boat",
+            description: "The boAt Nirvana Ion ANC earbuds are designed to deliver an immersive listening experience with advanced Active Noise Cancellation technology. These earbuds provide up to 24 hours of battery life when used with the charging case, making them ideal for long commutes or travel. With an IPX7 water resistance rating."
+        },
+        {
+            id: 11,
+            name: "boAt Airdopes 131",
+            image: "image/boat1/img8.webp",
+            image1: "image/boat1/img8(1).webp",
+            image2: "image/boat1/img8(2).webp",
+            color: "Light Pink",
+            type: "60 Hours Playback",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones"],
+            collection: ["popular-picks"],
+            features: ["touch-controls", "voice-assistant-compatible", "quick-charging", "auto-pairing"],
+            soundQuality: ["bass-boost"],
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: ["office-use", "commuter-friendly"],
+            budget: ["affordable-earbuds", "budget-friendly"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 959,
+            nc: "Passive Noise Cancellation (PNC).",
+            bl: "Up to 15 hours total playtime (with charging case). 3 hours playtime per charge for earbuds.",
+            wr: "No official water resistance rating.",
+            tc: "Yes, for playback, calls, and voice assistant.",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.0 for stable and quick pairing",
+            sq: "High Fidelity with deep bass",
+            bc: "USB-C port for fast charging. Charging case provides 3 additional charges.",
+            fc: "Ergonomic fit with lightweight design for all-day use. Compact case for easy portability.",
+            as: "Instant auto-pairing when removed from case. Minimal latency for smooth audio-visual experience.",
+            brand: "Boat",
+            description: "The boAt Airdopes 131 earbuds offer an excellent entry-level true wireless experience with a focus on affordability and usability. With Bluetooth 5.0, touch controls, and voice assistant support, these earbuds ensure seamless connectivity and convenience."
+        },
+        {
+            id: 12,
+            name: "Airdopes 161 Thor Edition",
+            image: "image/boat1/img9.webp",
+            image1: "image/boat1/img9(2).webp",
+            image2: "image/boat1/img9(1).webp",
+            color: "Pebble Black",
+            type: "40 Hours Playback",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones"],
+            collection: ["limited-edition", "popular-picks"],
+            features: ["touch-controls", "voice-assistant-compatible", "sweatproof-waterproof", "quick-charging", "auto-pairing"],
+            soundQuality: ["bass-boost", "hi-res-audio"],
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: ["gym-workout", "commuter-friendly", "travel-friendly"],
+            budget: ["affordable-earbuds", "budget-friendly"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 1099,
+            nc: "Passive Noise Cancellation.",
+            bl: "Up to 17 hours total playtime (including charging case). 5.5 hours per charge for earbuds.",
+            wr: "IPX5 Water & Sweat Resistance.",
+            tc: "Yes, for music control, calls, and voice assistant.",
+            va: "Yes, supports Google Assistant and Siri.",
+            con: "Bluetooth 5.1 with 10m wireless range.",
+            sq: "Signature boAt sound with rich bass. Immersive audio experience.",
+            bc: "USB-C port for fast charging. Fast charge: 10 minutes for 3 hours of use.",
+            fc: "Lightweight and ergonomic fit for extended wear. Comes with multiple ear-tip sizes.",
+            as: "Thor Edition branding with unique design elements. Auto-connect upon opening the case. Low latency for smooth audio synchronization.",
+            brand: "Boat",
+            description: "The boAt Airdopes 161 Thor Edition offers an electrifying audio experience inspired by Thors power. These limited-edition earbuds combine robust performance with boAts signature sound profile, ensuring deep bass and crisp audio. Designed for everyday wear, they offer a comfortable fit with IPX5 water resistance."
+        },
+        {
+            id: 13,
+            name: "boAt Airdopes 381",
+            image: "image/boat1/img10.webp",
+            image1: "image/boat1/img10(1).webp",
+            image2: "image/boat1/img10(2).webp",
+            color: "Teal Blue",
+            type: "20 Hours Playback",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones"],
+            collection: ["best-sellers", "top-rated"],
+            features: ["touch-controls", "voice-assistant-compatible", "sweatproof-waterproof", "quick-charging", "auto-pairing"],
+            soundQuality: ["bass-boost", "hi-res-audio"],
+            batteryLife: ["up-to-20-hours"],
+            usageLifestyle: ["gym-workout", "office-use", "commuter-friendly", "travel-friendly"],
+            budget: ["affordable-earbuds", "budget-friendly"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 2099,
+            nc: "Passive Noise Cancellation.",
+            bl: "Up to 20 hours total playtime (including charging case). 5 hours per charge for earbuds.",
+            wr: "IPX5 Water & Sweat Resistance.",
+            tc: "Yes, for calls, music, and voice assistant activation.",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.0 with 10m wireless range.",
+            sq: "boAt Signature Sound with powerful bass. Immersive audio experience.",
+            bc: "USB-C port for fast charging. Fast charge: 10 minutes for 1 hour of use.",
+            fc: "Ergonomic design with secure fit. Includes multiple ear-tip sizes for customized comfort.",
+            as: "Lightweight design. Instant wake and pair functionality. Low latency for smoother audio synchronization.",
+            brand: "Boat",
+            description: "The boAt Airdopes 381 are designed for those seeking quality sound on a budget. Featuring a robust build with IPX5 water resistance, these earbuds are ideal for workouts and daily commutes. They deliver up to 20 hours of total playtime, with fast charging support to keep you powered throughout the day."
+        },
+        {
+            id: 14,
+            name: "boAt Airdopes 113",
+            image: "image/boat1/img11.webp",
+            image1: "image/boat1/img11(1).webp",
+            image2: "image/boat1/img11(2).webp",
+            color: "Blue",
+            type: "24 Hours Playback",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones"],
+            collection: ["new-arrivals", "popular-picks"],
+            features: ["touch-controls", "sweatproof-waterproof", "voice-assistant-compatible", "quick-charging", "auto-pairing"],
+            soundQuality: ["bass-boost", "hi-res-audio"],
+            batteryLife: "up-to-20-hours",
+            usageLifestyle: ["gym-workout", "travel-friendly", "office-use", "home-audio"],
+            budget: ["affordable-earbuds", "budget-friendly"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 1299,
+            nc: "Passive Noise Cancellation.",
+            bl: "Up to 24 hours total playtime (with charging case). 6 hours per charge for earbuds.",
+            wr: "IPX4 Water & Sweat Resistance.",
+            tc: "Yes, for music playback, calls, and voice assistant.",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.1 with 10m wireless range.",
+            sq: "boAt Signature Sound with deep bass. Clear and balanced audio for an immersive experience.",
+            bc: "USB-C port for fast charging. Quick charge support: 10 minutes for 90 minutes playtime.",
+            fc: "Lightweight design for long-wearing comfort. Comes with multiple ear tips for a customized fit.",
+            as: "Instant wake and pair technology. Low latency for smoother streaming. LED indicators on the charging case.",
+            brand: "Boat",
+            description: "The boAt Airdopes 113 combines style and functionality in a compact design. With its 24-hour total playtime and quick charging capabilities, it’s perfect for on-the-go use. Enjoy immersive audio with boAt’s signature sound, enhanced with deep bass."
+        },
+        {
+            id: 15,
+            name: "boAt Airdopes 458",
+            image: "image/boat1/img12.webp",
+            image1: "image/boat1/img12(1).webp",
+            image2: "image/boat1/img12(2).webp",
+            color: "Active Black",
+            type: "Noise Cancellation",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones", "sports-earbuds"],
+            collection: ["best-sellers", "new-arrivals", "top-rated"],
+            features: ["noise-cancellation", "sweatproof-waterproof", "touch-controls", "voice-assistant-compatible", "quick-charging", "auto-pairing", "dual-device-pairing"],
+            soundQuality: ["premium-sound", "surround-sound", "low-latency"],
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: ["gym-workout", "office-use", "travel-friendly", "gaming-earbuds", "home-audio"],
+            budget: ["budget-friendly", "high-end-audio"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 1859,
+            nc: "Equipped with Active Noise Cancellation (ANC) technology, reducing ambient noise for a superior listening experience.",
+            bl: "Offers up to 30 hours of playback with the charging case. Features ASAP fast charging, providing 60 minutes of usage with just a 5-minute charge.",
+            wr: "IPX5-rated, making it sweatproof and splash-resistant, ideal for workouts and outdoor activities.",
+            tc: "Supports intuitive touch controls for play/pause, answering calls, and accessing voice assistants.",
+            va: "Works seamlessly with Google Assistant and Siri, enabling hands-free control.",
+            con: "Bluetooth 5.0 ensures a stable connection with a range of up to 10 meters.",
+            sq: "Premium sound with Bass Boost, Hi-Res Audio, and low latency for gaming.",
+            bc: "Fast charging support via USB-C. Total playtime of up to 30 hours with charging case.",
+            fc: "Ergonomically designed for a snug fit, enhancing comfort during extended use.",
+            as: "Auto pairing, dual microphones for clear calls, and an advanced audio chipset for immersive sound.",
+            brand: "Boat",
+            description: "The boAt Airdopes 458 offers a premium audio experience with Active Noise Cancellation and boAt’s signature sound. Perfect for diverse lifestyles, these earbuds are equipped with low latency mode for gamers, IPX5 water resistance for fitness enthusiasts, and long-lasting battery life for daily commuters."
+        },
+        {
+            id: 16,
+            name: "boAt Airdopes Crude",
+            image: "image/boat1/img13.webp",
+            image1: "image/boat1/img13(1).webp",
+            image2: "image/boat1/img13(2).webp",
+            color: "Cool Emerald",
+            type: "50 Hours Playback",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones"],
+            collection: ["best-sellers", "new-arrivals", "top-rated"],
+            features: ["noise-cancellation", "touch-controls", "voice-assistant-compatibility", "quick-charging", "auto-pairing", "dual-device-pairing"],
+            soundQuality: ["premium-sound", "low-latency", "surround-sound"],
+            batteryLife: ["up-to-20-hours"],
+            usageLifestyle: ["gym-workout", "office-use", "travel-friendly", "gaming-earbuds"],
+            budget: ["affordable-earbuds", "budget-friendly"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 1339,
+            nc: "Active Noise Cancellation (ANC) with up to 25 dB reduction.",
+            bl: "Up to 25 hours total playtime (including case). 5 hours per charge for earbuds with ANC on. 6 hours per charge for earbuds with ANC off.",
+            wr: "IPX4 Water & Sweat Resistant.",
+            tc: "Yes, intuitive touch controls for playback, calls, and activating voice assistant.",
+            va: "Compatible with Google Assistant and Siri.",
+            con: "Bluetooth 5.0 with a range of up to 10m",
+            sq: "Premium Sound with boAt Signature Bass. Low Latency Mode for gaming. Surround Sound.",
+            bc: "USB-C fast charging support. Total playback time of 25 hours with the case.",
+            fc: "Lightweight, ergonomic design with soft silicone ear tips. Secure fit for all-day wear.",
+            as: "Environmental Noise Cancellation (ENC) for clearer calls. LED battery indicators on the charging case. Low-latency mode for seamless gaming experience.",
+            brand: "Boat",
+            description: "The boAt Airdopes 458 delivers powerful audio performance with ANC and boAt’s signature bass. Designed for versatility, it caters to gamers with low-latency mode and to fitness enthusiasts with IPX4 water resistance. Quick charging, dual-device pairing, and touch controls enhance usability."
+        },
+        {
+            id: 17,
+            name: "boAt Airdopes Fuel",
+            image: "image/boat1/img14.webp",
+            image1: "image/boat1/img14(1).webp",
+            image2: "image/boat1/img14(2).webp",
+            color: "Classic Black",
+            type: "50 Hours Playback",
+            ptype: ["wireless-earbuds", "bluetooth-earbuds", "in-ear-headphones", "sports-earbuds"],
+            collection: ["best-sellers", "top-rated", "popular-picks"],
+            features: ["noise-cancellation", "touch-controls", "quick-charging", "dual-device-pairing", "auto-pairing"],
+            soundQuality: ["bass-boost", "low-latency"],
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: ["gym-workout", "travel-friendly", "gaming-earbuds", "home-audio"],
+            budget: ["affordable-earbuds", "budget-friendly"],
+            technicalSpecs: ["bluetooth-5.0", "usb-c-charging"],
+            price: 1699,
+            nc: "Equipped with Environmental Noise Cancellation (ENC) using a quad mic system for clear call quality.",
+            bl: "Up to 50 hours of total playback with the case.",
+            wr: "Rated IPX4 for water and sweat resistance, ideal for workouts and outdoor use.",
+            tc: "Yes, one-touch sensors for music control, calls, and activating voice assistants.",
+            va: "Compatible with Google Assistant and Siri.",
+            con: "Bluetooth 5.3 with a range of 10-15 meters. Features IWP (Instant Wake and Pair) technology for seamless device connection.",
+            sq: "10mm drivers deliver boAt’s signature sound with Bass Boost and low latency (40ms in Beast Mode for gaming).",
+            bc: "Supports ASAP charging: 5 minutes of charge provides 100 minutes of playback.",
+            fc: "Ergonomic design with snug in-ear fit.",
+            as: "Supports AI voice assistants and low-latency gaming mode.",
+            brand: "Boat",
+            description: "The boAt Airdopes Fuel earbuds are designed for dynamic, on-the-go lifestyles, offering powerful audio, modern features, and long-lasting performance. With a sleek design and lightweight build, they ensure a comfortable fit for extended use. They come equipped with Environmental Noise Cancellation (ENC)."
+        },
+        {
+            id: 18,
+            name: "boAt Airdopes Sonik",
+            image: "image/boat1/img15.webp",
+            image1: "image/boat1/img15(1).webp",
+            image2: "image/boat1/img15(2).webp",
+            color: "Thunder Black",
+            type: "60 Hours Playback",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 2199,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Wireless Earbuds with 60 Hours Playback, Bluetooth v5.3, ENx™ Technology, ASAP™ Charge."
+        },
+        {
+            id: 19,
+            name: "Nirvana ION ANC Limited Edition",
+            image: "image/boat1/img16.webp",
+            image1: "image/boat1/img16(1).webp",
+            image2: "image/boat1/img16(2).webp",
+            color: "Doodle Drift",
+            type: "Noise Cancellation",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 3499,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Bluetooth Earbuds with Active Noise Cancellation, ENx™ Technology, 120 Hours Playback, BEAST™ Mode."
+        },
+        {
+            id: 20,
+            name: "boAt Immortal 111",
+            image: "image/boat1/img17.webp",
+            image1: "image/boat1/img17(1).webp",
+            image2: "image/boat1/img17(2).webp",
+            color: "Black Sabre",
+            type: "Gaming Earbuds",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 1299,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Bluetooth Gaming Wireless Earbuds with BEAST™️Mode, ENx™ Technology, ASAP™ Charge, Bluetooth v5.3."
+        },
+        {
+            id: 21,
+            name: "boAt Immortal 128",
+            image: "image/boat1/img18.webp",
+            image1: "image/boat1/img18(1).webp",
+            image2: "image/boat1/img18(2).webp",
+            color: "White Sabre",
+            type: "40 Hours Playback",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 1499,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Gaming Earbuds with Super Low Latency, RGB Lights, BEAST™️ Mode, 40 Hours Playback, ENx™ Technology."
+        },
+        {
+            id: 22,
+            name: "boAt Immortal 141",
+            image: "image/boat1/img19.webp",
+            image1: "image/boat1/img19(1).jpg",
+            image2: "image/boat1/img19(2).jpg",
+            color: "White Sabre",
+            type: "Gaming Earbuds",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 1299,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Bluetooth Gaming Wireless Earbuds with BEAST™️Mode, ASAP™️ Charge, Bluetooth v5.3."
+        },
+        {
+            id: 23,
+            name: "boAt Immortal 150",
+            image: "image/boat1/img20.webp",
+            image1: "image/boat1/img20(1).webp",
+            image2: "image/boat1/img20(2).webp",
+            color: "Black Sabre",
+            type: "40 Hours Playback",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 1299,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Wireless Earbuds with BEAST™ Mode, 40 Hours Playback, ASAP™ Charge, LED Lights."
+        },
+        {
+            id: 24,
+            name: "boAt Nirvana Nebula",
+            image: "image/boat1/img21.webp",
+            image1: "image/boat1/img21(1).webp",
+            image2: "image/boat1/img21(2).webp",
+            color: "Celestial White",
+            type: "Noise Cancellation",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 2999,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Wireless Earbuds with ANC up to 35dB, Dolby Audio, boAt Signature Sound, BEAST™ Mode."
+        },
+        {
+            id: 25,
+            name: "Airdopes 138 DC Edition",
+            image: "image/boat1/img22.webp",
+            image1: "image/boat1/img22(1).webp",
+            image2: "image/boat1/img22(2).webp",
+            color: "Amazonian Red",
+            type: "Limited Edition",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 1569,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "13 mm Drivers, Type-C Carry Case, 12 Hours Nonstop Music."
+        },
+        {
+            id: 26,
+            name: "boAt Airdopes 118",
+            image: "image/boat1/img23.webp",
+            image1: "image/boat1/img23(1).webp",
+            image2: "image/boat1/img23(2).webp",
+            color: "Opal Black",
+            type: "Clear Calling",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 1399,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Earbuds with 13mm drivers, BEAST™ Mode for Gamers, ENx™ Technology."
+        },
+        {
+            id: 27,
+            name: "boAt Airdopes 183",
+            image: "image/boat1/img24.webp",
+            image1: "image/boat1/img24(1).webp",
+            image2: "image/boat1/img24(2).webp",
+            color: "Carbon Black",
+            type: "20 Hours Playback",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 1289,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Wireless Bluetooth Earbuds with 10mm Driver, Upto 90 Minutes Playback in 10 Minutes Charge, ASAP Charge Technology, BEAST™ mode."
+        },
+        {
+            id: 28,
+            name: "boAt Airdopes 111",
+            image: "image/boat1/img25.webp",
+            image1: "image/boat1/img25(1).webp",
+            image2: "image/boat1/img25(2).webp",
+            color: "Sand Pearl",
+            type: "28 Hours Playback",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 1349,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "Wireless Earbuds with 13mm drivers, 28 Hours of Playback, IWP Technology, ASAP Charge, Voice Assistant."
+        },
+        {
+            id: 29,
+            name: "boAt Airdopes 121 v2",
+            image: "image/boat1/img26.webp",
+            image1: "image/boat1/img26(1).webp",
+            image2: "image/boat1/img26(2).webp",
+            color: "Lightsteelblue",
+            type: "8mm Drivers",
+            ptype: "wireless-earbuds",
+            collection: "best-sellers",
+            features: "noise-cancellation",
+            soundQuality: "premium-sound",
+            batteryLife: ["long-battery-life"],
+            usageLifestyle: "gym-workout",
+            budget: "affordable-earbuds",
+            technicalSpecs: "bluetooth-5.0",
+            price: 1099,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boat",
+            description: "In-Ear Earbuds v2 with 8mm driver, LED Case Battery Indicator, 380mAh Pocket Friendly Charging Case."
+        },
+
+        // Boult
+        {
+            id: 30,
+            name: "Klarity 1",
+            image: "image/boult/img3.webp",
+            image1: "image/boult/img3(1).webp",
+            image2: "image/boult/img3(2).webp",
+            color: "Aquamarine",
+            type: "Noise Cancellation", 
+            price: 1099,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Premium earbuds with Luxurious hourglass design, Dual Device pairing, 80Hrs Battery life and fastest charging."
+        },
+        {
+            id: 31,
+            name: "Mustang Dash",
+            image: "image/boult/img4.webp",
+            image1: "image/boult/img4(1).webp",
+            image2: "image/boult/img4(2).webp",
+            color: "Dash",
+            type: "Gaming Earbuds",
+            price: 1299,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Earbuds with 100 Hrs Playtime, BOULT Amp App Support, Dual Device Connectivity, and Bluetooth V5.4."
+        },
+        {
+            id: 32,
+            name: "Mustang Derby",
+            image: "image/boult/img5.webp",
+            image1: "image/boult/img5(1).webp",
+            image2: "image/boult/img5(2).webp",
+            color: "Derby",            
+            type: "Gaming Earbuds",
+            price: 1399,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Earbuds with 100 Hrs Playtime, BOULT Amp App Support, Dual Device Connectivity, and Bluetooth V5.4."
+        },
+        {
+            id: 33,
+            name: "Y1 Gaming",
+            image: "image/boult/img6.webp",
+            image1: "image/boult/img6(1).webp",
+            image2: "image/boult/img6(2).webp",
+            color: "Black Metal",
+            type: "Gaming Earbuds",
+            price: 1099,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Gaming  Earbuds with 50H Playtime, 40ms Low Latency mode, Zen Quad Mic ENC and Dual device Connectivity."
+        },
+        {
+            id: 34,
+            name: "Z40 Ultra",
+            image: "image/boult/img7.webp",
+            image1: "image/boult/img7(1).webp",
+            image2: "image/boult/img7(2).webp",
+            color: "Metallic",
+            type: "Noise Cancellation",
+            price: 1599,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "True Wireless Earbuds with 100Hrs Playtime, 32dB ANC, 3 EQ modes, Dual Device Connectivity, Premium Design and Dual stream DSP."
+        },
+        {
+            id: 35,
+            name: "Z40 Pro",
+            image: "image/boult/img8.webp",
+            image1: "image/boult/img8(1).webp",
+            image2: "image/boult/img8(2).webp",
+            color: "Midnight",
+            type: "Noise Cancellation",
+            price: 1099,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Earbuds with ZEN™ Quad Mic ENC and 45ms Ultra Low Latency for Lag-free Gaming."
+        },
+        {
+            id: 36,
+            name: "Astra Neo",
+            image: "image/boult/img9.webp",
+            image1: "image/boult/img9(1).webp",
+            image2: "image/boult/img9(2).webp",
+            color: "Black",
+            type: "Gaming Earbuds",
+            price: 999,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Gaming Earbuds with 70 Hrs Playtime, 13mm Drivers - BoomX™, Mode Sync LEDs, Quad Mic ENC and Bluetooth V5.4."
+        },
+        {
+            id: 37,
+            name: "Z40 Gaming",
+            image: "image/boult/img10.webp",
+            image1: "image/boult/img10(1).webp",
+            image2: "image/boult/img10(2).webp",
+            color: "Black Moss",
+            type: "Gaming Earbuds",
+            price: 1199,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Gaming Earbuds with 60H Playtime, 40ms Low Latency mode, Zen Quad Mic ENC and Dual Connectivity."
+        },
+        {
+            id: 38,
+            name: "Curve Buds Pro",
+            image: "image/boult/img11.webp",
+            image1: "image/boult/img11(1).webp",
+            image2: "image/boult/img11(2).webp",
+            color: "Nautical Black",
+            type: "Noise Cancellation",
+            price: 1299,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Premium Wireless Earbuds with 100 Hrs Playtime, 3 EQ Modes, Zen™ Mode ENC, Type-C Fast Charging and IPX5 Resistant."
+        },
+        {
+            id: 39,
+            name: "Z40",
+            image: "image/boult/img12.webp",
+            image1: "image/boult/img12(1).webp",
+            image2: "image/boult/img12(2).webp",
+            color: "Brown",
+            type: "Gaming Earbuds",
+            price: 1299,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "True Wireless Earbuds with 60H Playtime, Zen ENC Mic,10mm Boom X™ Tech Drivers and Adaptive Low Latency mode."
+        },
+        {
+            id: 40,
+            name: "W40",
+            image: "image/boult/img13.webp",
+            image1: "image/boult/img13(1).webp",
+            image2: "image/boult/img13(2).webp",
+            color: "Denim Blue",
+            type: "Gaming Earbuds",
+            price: 1299,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "True Wireless Earbuds with 48Hrs Playtime, 10mm Boom X™ Tech Drivers, ZEN™ Quad Mic ENC, Type-C Fast charging and Bluetooth V5.3."
+        },
+        {
+            id: 41,
+            name: "Y1 Pro",
+            image: "image/boult/img14.webp",
+            image1: "image/boult/img14(1).webp",
+            image2: "image/boult/img14(2).webp",
+            color: "Blue",
+            type: "Noise Cancellation",
+            price: 1299,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Earbuds with A.I Powered ENC, 45ms Ultra-Low Latency, Supreme Bass, 60 Hours Playtime and IPX5 Rating."
+        },
+        {
+            id: 42,
+            name: "Y1",
+            image: "image/boult/img15.webp",
+            image1: "image/boult/img15(1).webp",
+            image2: "image/boult/img15(2).webp",
+            color: "Nautical Black",
+            type: "Noise Cancellation",
+            price: 1199,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "True Wireless Earbuds with ZEN Tech ENC dual mics, 50 Hours Playtime, Rich Bass BoomX Technology and IPX5 Water Resistant."
+        },
+        {
+            id: 43,
+            name: "W20",
+            image: "image/boult/img16.webp",
+            image1: "image/boult/img16(1).webp",
+            image2: "image/boult/img16(2).webp",
+            color: "Space Black",
+            type: "Noise Cancellation",
+            price: 1099,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "True Wireless Earbuds with 35 Hrs Playtime,13mm BoomX Drivers, 45ms Lowest Latency, Zen™ Mode ENC and Blink & Pair Technology."
+        },
+        {
+            id: 44,
+            name: "UFO",
+            image: "image/boult/img17.webp",
+            image1: "image/boult/img17(1).webp",
+            image2: "image/boult/img17(2).webp",
+            color: "Black Gloss",
+            type: "Noise Cancellation",
+            price: 1099,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Gaming Earbuds with 13mm BoomX Drivers, Ultra-Low Latency Combat™ Mode, Mode Sync LEDs and Dedicated App Connectivity."
+        },
+        {
+            id: 45,
+            name: "Z35",
+            image: "image/boult/img18.webp",
+            image1: "image/boult/img18(1).webp",
+            image2: "image/boult/img18(2).webp",
+            color: "Sunset Grey",
+            type: "Noise Cancellation",
+            price: 1099,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Earphones with ZEN ENC Mic, 32H Playtime."
+        },
+        {
+            id: 46,
+            name: "Powerbuds",
+            image: "image/boult/img19.webp",
+            image1: "image/boult/img19(1).webp",
+            image2: "image/boult/img19(2).webp",
+            color: "Black",
+            type: "Noise Cancellation",
+            price: 1499,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Earbuds with 120H Playtime, Powerbank & Pro+ Calling Mic."
+        },
+        {
+            id: 47,
+            name: "Truebuds",
+            image: "image/boult/img20.webp",
+            image1: "image/boult/img20(1).webp",
+            image2: "image/boult/img20(2).webp",
+            color: "Red",
+            type: "Noise Cancellation",
+            price: 1199,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Earbuds with 30H Battery Life, Dual mics."
+        },
+        {
+            id: 48,
+            name: "X50",
+            image: "image/boult/img21.webp",
+            image1: "image/boult/img21(1).webp",
+            image2: "image/boult/img21(2).webp",
+            color: "White",
+            type: "Noise Cancellation",
+            price: 1099,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Earbuds with Quad Mic ENC, 40H Playtime."
+        },
+        {
+            id: 49,
+            name: "Ammo",
+            image: "image/boult/img22.webp",
+            image1: "image/boult/img22(1).webp",
+            image2: "image/boult/img22(2).webp",
+            color: "Black",
+            type: "Gaming Earbuds",
+            price: 1099,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Gaming Earbuds with 60Hrs Playtime, Zen™ Mode ENC, Mode Sync LEDs​, IPX5 Rating and Ultra-Low Latency Combat Mode™."
+        },
+        {
+            id: 50,
+            name: "Maverick",
+            image: "image/boult/img23.webp",
+            image1: "image/boult/img23(1).webp",
+            image2: "image/boult/img23(2).webp",
+            color: "Nautical Black",
+            type: "Gaming Earbuds",
+            price: 899,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Gaming Earbuds with Breathing Ambient Light, 45ms Low Latency, Quad Mic ENC with Combat Gaming Mode, Voice Assistant support."
+        },
+        {
+            id: 51,
+            name: "X70",
+            image: "image/boult/img24.webp",
+            image1: "image/boult/img24(1).webp",
+            image2: "image/boult/img24(2).webp",
+            color: "white",
+            type: "Noise Cancellation",
+            price: 1599,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "True Wireless ANC Earbuds with 60Hr Playtime, Zen ENC Mic, EQ modes, Extra Bass and Immersive Gaming Experience."
+        },
+        {
+            id: 52,
+            name: "Ember",
+            image: "image/boult/img25.webp",
+            image1: "image/boult/img25(1).webp",
+            image2: "image/boult/img25(2).webp",
+            color: "Grey",
+            type: "Gaming Earbuds",
+            price: 1649,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "Wireless Gaming Earbuds with 48 Hrs Playtime, 13mm Drivers - BoomX™, Mode Sync LEDs, Quad Mic ENC and Bluetooth V5.3."
+        },
+        {
+            id: 53,
+            name: "Rito Pro",
+            image: "image/boult/img26.webp",
+            image1: "image/boult/img26(1).webp",
+            image2: "image/boult/img26(2).webp",
+            color: "Green",
+            type: "Noise Cancellation",
+            price: 1499,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Boult",
+            description: "True Wireless Earbuds with 40ms Low-Latency, 45Hrs Playtime, ZEN Quad Mic ENC and Lightning Boult™ Fast Charging ."
+        },
+
+        //realme
+        {
+            id: 54,
+            name: "realme Buds N1",
+            image: "image/realme/img1.webp",
+            image1: "image/realme/img1(1).webp",
+            image2: "image/realme/img1(2).webp",
+            color: "Energizing Green",
+            type: "Noise Cancellation",
+            price: 1999,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Realme",
+            description: "46db Hybrid Noise Cancellation."
+        },
+        {
+            id: 55,
+            name: "realme Buds T01",
+            image: "image/realme/img2.webp",
+            image1: "image/realme/img2(1).webp",
+            image2: "image/realme/img2(2).webp",
+            color: "Black",
+            type: "Noise Cancellation",
+            price: 1199,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Realme",
+            description: "13mm Dynamic Bass Driver."
+        },
+        {
+            id: 56,
+            name: "realme Buds T300",
+            image: "image/realme/img3.webp",
+            image1: "image/realme/img3(1).webp",
+            image2: "image/realme/img3(2).webp",
+            color: "Dome Green",
+            type: "Noise Cancellation",
+            price: 1699,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Realme",
+            description: "12.4mm Dynamic Bass Driver."
+        },
+        {
+            id: 57,
+            name: "realme Buds T310",
+            image: "image/realme/img4.webp",
+            image1: "image/realme/img4(1).webp",
+            image2: "image/realme/img4(2).webp",
+            color: "Purple",
+            type: "Noise Cancellation",
+            price: 1999,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Realme",
+            description: "Sound Off, Music On."
+        },
+        {
+            id: 58,
+            name: "realme Buds Air6",
+            image: "image/realme/img5.webp",
+            image1: "image/realme/img5(1).webp",
+            image2: "image/realme/img5(2).webp",
+            color: "Royal Violet",
+            type: "Noise Cancellation",
+            price: 2799,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Realme",
+            description: "Indian Deepest 50dB ANC."
+        },
+        {
+            id: 59,
+            name: "realme Buds T110",
+            image: "image/realme/img6.webp",
+            image1: "image/realme/img6(1).webp",
+            image2: "image/realme/img6(2).webp",
+            color: "Country Green",
+            type: "Noise Cancellation",
+            price: 1499,
+            nc: "Yes",
+            bl: "120 Hours",
+            wr: "ip6",
+            tc: "Yes",
+            va: "Yes, supports Google Assistant and Siri",
+            con: "Bluetooth 5.2",
+            sq: "High Fidelity with deep bass",
+            bc: "gf",
+            fc: "hfue",
+            as: "feu",
+            brand: "Realme",
+            description: "Listen in Full Color."
+        }
+    ];
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    shuffleArray(products);
+
+function renderProducts(filteredProducts) {
+    var productList = $('#bestseller-list');
+    productList.empty(); 
+
+    if (filteredProducts.length > 0) {
+        $.each(filteredProducts, function (index, product) {
+            var productHTML = `
+                <div class="col-md-6 col-sm-6 col-lg-4">
+                    <div class="card product-card shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out d-flex flex-row">
+                        <!-- Left: Product Image -->
+                        <div class="col-4 p-2 d-flex align-items-center justify-content-center webp-image position-relative">
+                            <img src="${product.image}" class="img-fluid transparent-image" alt="${product.name}" style="object-fit: cover; max-height: 150px;">
+                            
+                            <div class="position-absolute rounded-bottom bottom-0 start-0 w-100 text-white text-center label-overlay" style="opacity: 0.85; background-color: var(--highlight-color); font-size: 0.75rem; padding: 2px 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+                                ${product.type}
+                            </div>
+                        </div>
+                        
+                        <!-- Right: Product Details -->
+                        <div class="card-body col-8 d-flex flex-column justify-content-between p-3">
+                            <!-- Product Name -->
+                            <p class="card-title text-start font-semibold fs-6 text-truncate" title="${product.name}">
+                                ${product.name}
+                            </p>
+                            <!-- Product Color -->
+                            <p class="text-start text-muted text-truncate" title="${product.color}">
+                                ${product.color}
+                            </p>
+                            <!-- Price -->
+                            <p class="card-text text-start font-bold text-gray-700">₹${product.price}</p>
+                            <!-- Buttons -->
+                            <div class="d-flex flex-column">
+                                <!-- Add to Cart Button -->
+                                <a href="#" class="btn btn-dark add-to-cart d-flex items-center justify-center mb-2" 
+                                    data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" 
+                                    data-color="${product.color}" data-image="${product.image}">
+                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                                </a>
+                                <!-- View Details Button -->
+                                <button class="btn btn-success w-100" data-bs-toggle="modal" 
+                                        data-bs-target="#productDetailModal" 
+                                        onclick='showProductDetails(${JSON.stringify(product).replace(/'/g, "\\'")})'>
+                                    <i class="fas fa-eye me-2"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            productList.append(productHTML);
+        });
+    } else {
+        productList.html('<div class="no-product-found">No result found ...</div>');
+    }
+}
+
+// Function to filter products based on selected filters
+function filterProducts() {
+    try {
+        const searchQuery = $('#search').val().toLowerCase().trim() || $('#search-mobile').val().toLowerCase().trim();
+        const selectedBrands = [];
+        const selectedCategories = [];
+        const selectedPopularCollections = [];
+        const selectedFeatures = [];
+        const selectedSoundQuality = [];
+        const selectedBatteryLife = [];
+        const selectedUsageLifestyle = [];
+        const selectedBudget = [];
+        const selectedTechnicalSpecs = [];
+
+        // Collect filters based on selected checkboxes
+        $('.product-type-checkbox:checked').each(function () {
+            selectedCategories.push($(this).val().toLowerCase().trim());
+        });
+        $('.brand-checkbox:checked').each(function () {
+            selectedBrands.push($(this).val().toLowerCase().trim());
+        });
+        $('.popular-collection-checkbox:checked').each(function () {
+            selectedPopularCollections.push($(this).val().toLowerCase().trim());
+        });
+        $('.feature-checkbox:checked').each(function () {
+            selectedFeatures.push($(this).val().toLowerCase().trim());
+        });
+        $('.sound-quality-checkbox:checked').each(function () {
+            selectedSoundQuality.push($(this).val().toLowerCase().trim());
+        });
+        $('.battery-life-checkbox:checked').each(function () {
+            selectedBatteryLife.push($(this).val().toLowerCase().trim());
+        });
+        $('.usage-lifestyle-checkbox:checked').each(function () {
+            selectedUsageLifestyle.push($(this).val().toLowerCase().trim());
+        });
+        $('.budget-checkbox:checked').each(function () {
+            selectedBudget.push($(this).val().toLowerCase().trim());
+        });
+        $('.technical-spec-checkbox:checked').each(function () {
+            selectedTechnicalSpecs.push($(this).val().toLowerCase().trim());
+        });
+
+        // Filter products based on selected filters
+        const filteredProducts = products.filter(function (product) {
+            const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand?.toLowerCase());
+
+            const matchesCategory = selectedCategories.length === 0 || 
+                                    (Array.isArray(product.ptype) 
+                                     ? product.ptype.some(type => selectedCategories.includes(type.toLowerCase()))
+                                     : selectedCategories.includes(product.ptype?.toLowerCase()));
+
+            const matchesPopularCollection = selectedPopularCollections.length === 0 ||
+                                             (Array.isArray(product.collection) 
+                                             ? product.collection.some(type => selectedPopularCollections.includes(type.toLowerCase()))
+                                             : selectedPopularCollections.includes(product.collection?.toLowerCase()));
+
+            const matchesFeatures = selectedFeatures.length === 0 ||
+                                    (Array.isArray(product.features) 
+                                     ? product.features.some(feature => selectedFeatures.includes(feature.toLowerCase()))
+                                     : selectedFeatures.every(feature => product.features?.toLowerCase().includes(feature)));
+
+            const matchesSoundQuality = selectedSoundQuality.length === 0 ||
+                                        (Array.isArray(product.soundQuality) 
+                                        ? product.soundQuality.some(type => selectedSoundQuality.includes(type.toLowerCase()))
+                                        : selectedSoundQuality.includes(product.soundQuality?.toLowerCase()));
+
+            const matchesBatteryLife = selectedBatteryLife.length === 0 ||
+                                       (Array.isArray(product.batteryLife) 
+                                       ? product.batteryLife.some(type => selectedBatteryLife.includes(type.toLowerCase()))
+                                       : selectedBatteryLife.includes(product.batteryLife?.toLowerCase()));
+
+            const matchesUsageLifestyle = selectedUsageLifestyle.length === 0 ||
+                                          (Array.isArray(product.usageLifestyle) 
+                                          ? product.usageLifestyle.some(type => selectedUsageLifestyle.includes(type.toLowerCase()))
+                                          : selectedUsageLifestyle.includes(product.usageLifestyle?.toLowerCase()));
+
+            const matchesBudget = selectedBudget.length === 0 ||
+                                  (Array.isArray(product.budget) 
+                                  ? product.budget.some(type => selectedBudget.includes(type.toLowerCase()))
+                                  : selectedBudget.includes(product.budget?.toLowerCase()));
+
+            const matchesTechnicalSpecs = selectedTechnicalSpecs.length === 0 ||
+                                          (Array.isArray(product.technicalSpecs) 
+                                          ? product.technicalSpecs.some(spec => selectedTechnicalSpecs.includes(spec.toLowerCase()))
+                                          : selectedTechnicalSpecs.every(spec => product.technicalSpecs?.toLowerCase().includes(spec)));
+
+            // Search query match
+            const matchesSearch = !searchQuery || product.name.toLowerCase().includes(searchQuery);
+
+            return matchesBrand && matchesCategory && matchesPopularCollection && matchesFeatures && matchesSoundQuality &&
+                   matchesBatteryLife && matchesUsageLifestyle && matchesBudget && matchesTechnicalSpecs && matchesSearch;
+        });
+
+        // Display filtered products
+        renderProducts(filteredProducts);
+
+        // Ensure Add to Cart buttons are ready after filtering
+        setupAddToCartButtons();
+    } catch (error) {
+        console.error("Error filtering products:", error);
+        $('#bestseller-list').html('<div class="no-product-found">An error occurred while filtering products. Please try again.</div>');
+    }
+}
+
+// Event listeners for checkboxes to filter products
+$(document).ready(function () {
+    // Attach change event listener to checkboxes
+    $('.brand-checkbox, .product-type-checkbox, .popular-collection-checkbox, .feature-checkbox, .sound-quality-checkbox, .battery-life-checkbox, .usage-lifestyle-checkbox, .budget-checkbox, .technical-spec-checkbox').on('change', function () {
+        filterProducts();
+    });
+});
+
+    // Function to set up event listeners for dynamically added "Add to Cart" buttons
+    function setupAddToCartButtons() {
+        $(".add-to-cart").off("click").on("click", function(e) {
+            e.preventDefault();
+
+            // Retrieve product data attributes
+            const productId = $(this).data("id");
+            const productName = $(this).data("name");
+            const productPrice = parseFloat($(this).data("price")); // Ensure price is a float
+            const productColor = $(this).data("color");
+            const productImage = $(this).data("image");
+
+            // Add the product to the cart list
+            addToCart(productId, productName, productPrice, productColor, productImage);
+
+            // Update total items and price
+            updateCartTotals(productPrice);
+            
+            // Show the cart sidebar (offcanvas)
+            $('#cart-sidebar').offcanvas('show');
+        });
+    }
+
+    // Event listeners
+    $('.brand-checkbox, .category-checkbox').change(filterProducts);
+    $('#search, #search-mobile').on('input', function () {
+        filterProducts();
+    });
+
+    // Initial product render and event setup
+    renderProducts(products);
+    setupAddToCartButtons();  // Initialize Add to Cart event listeners
+
+    function applyFilters() {
+        var maxPrice = parseInt($('#priceRange').val());
+        var selectedBrands = $('.brand-checkbox:checked').map(function () {
+            return $(this).val();
+        }).get();
+        
+        var filteredProducts = products.filter(function (product) {
+            var isPriceValid = product.price <= maxPrice;
+            var isBrandValid = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+            return isPriceValid && isBrandValid;
+        });
+
+        return filteredProducts;
+    }
+
+    function getSortOption() {
+    // Check which sort dropdown is visible
+    if (window.innerWidth >= 768) { // Large screens
+        return $('#sortOptionsLarge').val();
+    } else { // Small screens
+        return $('#sortOptionsSmall').val();
+    }
+}
+
+function applySorting(filteredProducts) {
+    var sortOption = getSortOption();
+    if (sortOption === 'lowToHigh') {
+        filteredProducts.sort(function (a, b) {
+            return a.price - b.price;
+        });
+    } else if (sortOption === 'highToLow') {
+        filteredProducts.sort(function (a, b) {
+            return b.price - a.price;
+        });
+    }
+    // Additional sorting logic for 'popular' if needed
+    return filteredProducts;
+}
+
+function updateProducts() {
+    var filteredProducts = applyFilters();
+    var sortedProducts = applySorting(filteredProducts);
+    renderProducts(sortedProducts);
+}
+
+    $('#priceRange').on('input', function () {
+        $('#priceValue').text(`₹${$(this).val()}`);
+        updateProducts();
+    });
+
+    $('.brand-checkbox').on('change', function () {
+        updateProducts();
+    });
+
+    $('#sortOptionsLarge, #sortOptionsSmall').on('change', updateProducts);
+
+    // Initial render
+    renderProducts(products);
+
+    // Add to cart functionality (for both product list and modal)
+    $(document).on('click', '.add-to-cart', function (e) {
+        e.preventDefault();
+
+        var productId = $(this).data('id');
+        var productName = $(this).data('name');
+        var productColor = $(this).data('color');
+        var productPrice = $(this).data('price');
+        var productImage = $(this).data('image');
+
+        if (!productId || !productName || !productPrice || !productImage || !productColor) {
+            alert("Product details are missing.");
+            return;
+        }
+
+        var product = {
+            id: productId,
+            name: productName,
+            color: productColor,
+            price: productPrice,
+            image: productImage,
+            quantity: 1
+        };
+
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        var existingProductIndex = cart.findIndex(item => item.id === productId);
+        if (existingProductIndex >= 0) {
+            cart[existingProductIndex].quantity += 1;
+        } else {
+            cart.push(product);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+    });
+
+    // Show product details in modal
+    window.showProductDetails = function (product) {
+        $('#modalProductImage1').attr('src', product.image);
+        $('#modalProductImage2').attr('src', product.image1);
+        $('#modalProductImage3').attr('src', product.image2);
+        $('#modalProductName').text(product.name);
+        $('#modalProductPrice').text('₹' + product.price);
+        $('#modalProductDescription').text(product.description);
+        $('#modalProductBrand').text(product.brand);
+        $('#modalProductColor').text(product.color);
+        $('#modalProductNC').text(product.nc);
+        $('#modalProductWR').text(product.wr); 
+        $('#modalProductTC').text(product.tc); 
+        $('#modalProductVA').text(product.va); 
+        $('#modalProductCon').text(product.con); 
+        $('#modalProductSQ').text(product.sq); 
+        $('#modalProductBL').text(product.bl);
+        $('#modalProductBC').text(product.bc);
+        $('#modalProductFC').text(product.fc);
+        $('#modalProductAS').text(product.as);
+
+        // Update the "Add to Cart" button in the modal with correct data attributes
+        $('#addToCart').data('id', product.id)
+            .data('name', product.name)
+            .data('price', product.price)
+            .data('color', product.color)
+            .data('image', product.image);
+    };
+});
+</script>
+
+<script>
+    $(document).ready(function() {
+    let totalItems = 0;  // Variable to keep track of total items
+    let totalPrice = 0;  // Variable to keep track of total price
+
+    // Click event for Add to Cart button
+    $(document).on("click", ".add-to-cart", function(e) {
+        e.preventDefault();
+
+        // Retrieve product data attributes
+        const productId = $(this).data("id");
+        const productName = $(this).data("name");
+        const productPrice = parseFloat($(this).data("price")); // Ensure price is a float
+        const productColor = $(this).data("color");
+        const productImage = $(this).data("image");
+
+        // Add the product to the cart list
+        addToCart(productId, productName, productPrice, productColor, productImage);
+
+        // Update total items and price
+        updateCartTotals(productPrice);
+        
+        // Show the cart sidebar (offcanvas)
+        $('#cart-sidebar').offcanvas('show');
+    });
+
+    // Add product to cart (dynamically)
+    function addToCart(id, name, price, color, image) {
+        // Check if the item is already in the cart
+        let existingItem = $(`#cart-items .cart-item[data-id='${id}']`);
+        if (existingItem.length) {
+            // If item exists, update the quantity
+            let quantityElement = existingItem.find('.item-quantity');
+            let currentQuantity = parseInt(quantityElement.text());
+            quantityElement.text(currentQuantity + 1); // Increment quantity
+        } else {
+            const cartItem = `
+                <div class="cart-item col-md-12 col-12" data-id="${id}">
+                    <div class="row align-items-center border-bottom py-3">
+                        <div class="col-md-3 col-3 text-start">
+                            <img src="${image}" alt="${name}" class="img-fluid" style="max-width: 60px;">
+                        </div>
+                        <div class="col-md-6 col-6 text-start">
+                            <h6 class="mb-1">${name}</h6>
+                            <small class="text-muted">${color}</small>
+                        </div>
+                        <div class="col-md-3 col-3 text-end">
+                            <span class="card-text" style="color: var(--highlight-color)">₹${price.toFixed(2)}</span>
+                            <span class="item-quantity badge bg-light text-dark rounded-pill ms-2">1</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $("#cart-items").append(cartItem);
+        }
+    }
+
+    // Update total items and total price
+    function updateCartTotals(price) {
+        totalItems += 1; // Increment total items by 1
+        totalPrice += price; // Add the price of the new item to total price
+
+        // Update the totals in the UI
+        $("#total-items").text(totalItems);
+        $("#total-price").text('₹' + totalPrice.toFixed(2)); // Format to 2 decimal places
+    }
+});
+</script>
+
+</body>
+
+</html>
